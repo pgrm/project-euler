@@ -9,30 +9,13 @@ The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
 Evaluate the sum of all the amicable numbers under 10000.
 """
 
-
-def get_proper_divisors(number):
-    divisor = 0
-    divisors = []
-
-    while True:
-        divisor += 1
-        quotient = number / divisor
-
-        if divisor > quotient:
-            break
-
-        if number % divisor == 0:
-            divisors += [divisor]
-            if divisor != quotient and quotient < number:
-                divisors += [quotient]
-
-    return divisors
+import divisors
 
 divisorSums = {}
 sumOfAmicableNumbers = 0
 
 for i in xrange(1, 10000):
-    divisorSums[i] = sum(get_proper_divisors(i))
+    divisorSums[i] = sum(divisors.get_proper_divisors(i))
     if divisorSums[i] != i and divisorSums[i] in divisorSums:
         if divisorSums[divisorSums[i]] == i:
             sumOfAmicableNumbers += i
