@@ -12,30 +12,18 @@ HINT: Some products can be obtained in more than one way so be sure to only incl
 
 import permutations
 
-
-def combine_numbers(numbers):
-    i = len(numbers)
-    combined_number = 0
-
-    for n in numbers:
-        i -= 1
-        combined_number += n * (10 ** i)
-
-    return combined_number
-
-
 foundProducts = {}
 foundProductsSum = 0
 
 for perm in permutations.permutations(range(1, 10)):
-    product = combine_numbers(perm[-4:])  # last four digits
+    product = permutations.combine_numbers(perm[-4:])  # last four digits
 
     for x in xrange(1, 4):
         factor1 = perm[:x]  # first x digit
         factor2 = perm[x:-4]  # starting from x'th digit + 1 (0-based index) all except the last four
 
-        factor1 = combine_numbers(factor1)
-        factor2 = combine_numbers(factor2)
+        factor1 = permutations.combine_numbers(factor1)
+        factor2 = permutations.combine_numbers(factor2)
 
         if factor1 * factor2 == product:
             if product not in foundProducts:
